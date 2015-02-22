@@ -1,0 +1,33 @@
+{
+  "name": "knex-filemaker-jdbc",
+  "version": "0.0.1",
+  "description": "A Knex dialect for connecting to a FileMaker database via JDBC",
+  "main": "filemaker-jdbc/index.js",
+  "dependencies": {
+    "knex": "0.7.3"
+  },
+  "devDependencies": {
+    "jdbc": "0.0.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jeremy-hunter/knex-filemaker-jdbc.git"
+  },
+  "keywords": [
+    "sql",
+    "query",
+    "filemaker",
+    "jdbc",
+    "knex"
+  ],
+  "author": {
+    "name": "Jeremy Hunter",
+    "web": "https://github.com/jeremy-hunter"
+  },
+  "files": [
+    "README.md",
+    "filemaker-jdbc/*",
+    "LICENSE"
+  ],
+  "license": "MIT"
+}
