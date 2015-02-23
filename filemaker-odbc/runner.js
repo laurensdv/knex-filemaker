@@ -11,22 +11,21 @@ var Runner = require('../node_modules/knex/lib/runner');
 
 // Inherit from the `Runner` constructor's prototype,
 // so we can add the correct `then` method.
-function Runner_FILEMAKER_JDBC() {
+function Runner_FILEMAKER_ODBC() {
   this.client = client;
   Runner.apply(this, arguments);
 }
-inherits(Runner_FILEMAKER_JDBC, Runner);
+inherits(Runner_FILEMAKER_ODBC, Runner);
 
 // Runs the query on the specified connection, providing the bindings
 // and any other necessary prep work.
-Runner_FILEMAKER_JDBC.prototype._query = Promise.method(function(obj) {
+Runner_FILEMAKER_ODBC.prototype._query = Promise.method(function(obj) {
   var connection = this.connection;
   var sql = obj.sql;
   if (this.isDebugging()) this.debug(obj);
   if (obj.options) sql = _.extend({text: sql}, obj.options);
   return new Promise(function(resolver, rejecter) {
-
-    connection.executeQuery(SqlString.format(sql, obj.bindings), function(err, response) {
+    connection.query(SqlString.format(sql, obj.bindings), function(err, response) {
       if (err) return rejecter(err);
       obj.response = response;
       resolver(obj);
@@ -35,7 +34,7 @@ Runner_FILEMAKER_JDBC.prototype._query = Promise.method(function(obj) {
 });
 
 // Ensures the response is returned in the same format as other clients.
-Runner_FILEMAKER_JDBC.prototype.processResponse = function(obj) {
+Runner_FILEMAKER_ODBC.prototype.processResponse = function(obj) {
   var resp = obj.response;
   if (obj.output) return obj.output.call(this, resp);
   if (obj.method === 'raw') return resp;
@@ -64,6 +63,6 @@ Runner_FILEMAKER_JDBC.prototype.processResponse = function(obj) {
 };
 
 // Assign the newly extended `Runner` constructor to the client object.
-client.Runner = Runner_FILEMAKER_JDBC;
+client.Runner = Runner_FILEMAKER_ODBC;
 
 };

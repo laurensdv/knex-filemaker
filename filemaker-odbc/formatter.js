@@ -9,20 +9,20 @@ var inherits  = require('inherits');
 
 // The "formatter" is used to ensure all output is properly
 // escaped & parameterized.
-function Formatter_FILEMAKER_JDBC() {
+function Formatter_FILEMAKER_ODBC() {
   this.client = client;
   this.paramCount = 0;
   Formatter.apply(this, arguments);
 }
-inherits(Formatter_FILEMAKER_JDBC, Formatter);
+inherits(Formatter_FILEMAKER_ODBC, Formatter);
 
-Formatter_FILEMAKER_JDBC.prototype.operators = [
+Formatter_FILEMAKER_ODBC.prototype.operators = [
   '=', '<>', '>', '>=', '<', '<=',
   'LIKE', 'NOT LIKE', 'IS NULL', 'IS NOT NULL', 'BETWEEN', 'IN', 'NOT IN', 'EXISTS', 'ANY', 'ALL'
 ];
 
 // Wraps a value (column, tableName) with the correct ticks.
-Formatter_FILEMAKER_JDBC.prototype.wrapValue = function(value) {
+Formatter_FILEMAKER_ODBC.prototype.wrapValue = function(value) {
   if (value === '*') return value;
   var matched = value.match(/(.*?)(\[[0-9]\])/);
   if (matched) return this.wrapValue(matched[1]) + matched[2];
@@ -40,9 +40,9 @@ var wrapperMemo = (function(){
   };
 }());
 
-Formatter_FILEMAKER_JDBC.prototype._wrap = wrapperMemo;
+Formatter_FILEMAKER_ODBC.prototype._wrap = wrapperMemo;
 
 // Assign the formatter to the the client.
-client.Formatter = Formatter_FILEMAKER_JDBC;
+client.Formatter = Formatter_FILEMAKER_ODBC;
 
 };

@@ -13,33 +13,33 @@ var QueryCompiler = require('../node_modules/knex/lib/query/compiler');
 // Query Builder
 // ------
 
-function QueryBuilder_FILEMAKER_JDBC() {
+function QueryBuilder_FILEMAKER_ODBC() {
   this.client = client;
   QueryBuilder.apply(this, arguments);
   if (client.defaultReturning) {
     this._single.returning = client.defaultReturning;
   }
 }
-inherits(QueryBuilder_FILEMAKER_JDBC, QueryBuilder);
+inherits(QueryBuilder_FILEMAKER_ODBC, QueryBuilder);
 
 // Query Compiler
 // ------
 
-function QueryCompiler_FILEMAKER_JDBC() {
+function QueryCompiler_FILEMAKER_ODBC() {
   this.formatter = new client.Formatter();
   QueryCompiler.apply(this, arguments);
 }
-inherits(QueryCompiler_FILEMAKER_JDBC, QueryCompiler);
+inherits(QueryCompiler_FILEMAKER_ODBC, QueryCompiler);
 
 // Used when the insert call is empty.
-QueryCompiler_FILEMAKER_JDBC.prototype._emptyInsertValue = ' ';
+QueryCompiler_FILEMAKER_ODBC.prototype._emptyInsertValue = ' ';
 
 // is used if the an array with multiple empty values supplied
-QueryCompiler_FILEMAKER_JDBC.prototype._defaultInsertValue = ' ';
+QueryCompiler_FILEMAKER_ODBC.prototype._defaultInsertValue = ' ';
 
 // Compiles an `insert` query, allowing for multiple
 // inserts using a single query statement.
-QueryCompiler_FILEMAKER_JDBC.prototype.insert = function() {
+QueryCompiler_FILEMAKER_ODBC.prototype.insert = function() {
   var self = this;
   var insertValues = this.single.insert;
 
@@ -66,7 +66,7 @@ QueryCompiler_FILEMAKER_JDBC.prototype.insert = function() {
 };
 
 // Compiles an `update` query, allowing for a return value.
-QueryCompiler_FILEMAKER_JDBC.prototype.update = function() {
+QueryCompiler_FILEMAKER_ODBC.prototype.update = function() {
   var updateData = this._prepUpdate(this.single.update);
   var wheres     = this.where();
   var returning  = this.single.returning;
@@ -79,7 +79,7 @@ QueryCompiler_FILEMAKER_JDBC.prototype.update = function() {
 };
 
 // Compiles an `delete` query, allowing for a return value.
-QueryCompiler_FILEMAKER_JDBC.prototype.del = function() {
+QueryCompiler_FILEMAKER_ODBC.prototype.del = function() {
   var sql = QueryCompiler.prototype.del.apply(this, arguments);
   var returning  = this.single.returning;
   return {
@@ -90,13 +90,13 @@ QueryCompiler_FILEMAKER_JDBC.prototype.del = function() {
   };
 };
 
-QueryCompiler_FILEMAKER_JDBC.prototype.forUpdate = function() {
+QueryCompiler_FILEMAKER_ODBC.prototype.forUpdate = function() {
   return 'FOR UPDATE';
 };
-QueryCompiler_FILEMAKER_JDBC.prototype.limit = function() {
+QueryCompiler_FILEMAKER_ODBC.prototype.limit = function() {
   return '';
   };
-client.QueryBuilder = QueryBuilder_FILEMAKER_JDBC;
-client.QueryCompiler = QueryCompiler_FILEMAKER_JDBC;
+client.QueryBuilder = QueryBuilder_FILEMAKER_ODBC;
+client.QueryCompiler = QueryCompiler_FILEMAKER_ODBC;
 
 };

@@ -14,20 +14,20 @@ var Schema   = require('../../../schema');
 // Table
 // ------
 
-function TableBuilder_FILEMAKER_JDBC() {
+function TableBuilder_FILEMAKER_ODBC() {
   this.client = client;
   Schema.TableBuilder.apply(this, arguments);
 }
-inherits(TableBuilder_FILEMAKER_JDBC, Schema.TableBuilder);
+inherits(TableBuilder_FILEMAKER_ODBC, Schema.TableBuilder);
 
-function TableCompiler_FILEMAKER_JDBC() {
+function TableCompiler_FILEMAKER_ODBC() {
   this.client = client;
   this.Formatter = client.Formatter;
   Schema.TableCompiler.apply(this, arguments);
 }
-inherits(TableCompiler_FILEMAKER_JDBC, Schema.TableCompiler);
+inherits(TableCompiler_FILEMAKER_ODBC, Schema.TableCompiler);
 
-client.TableBuilder = TableBuilder_FILEMAKER_JDBC;
-client.TableCompiler = TableCompiler_FILEMAKER_JDBC;
+client.TableBuilder = TableBuilder_FILEMAKER_ODBC;
+client.TableCompiler = TableCompiler_FILEMAKER_ODBC;
 
 };
