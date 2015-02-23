@@ -12,13 +12,13 @@ JDBC is Linux compatible since it runs on a JVM
 ODBC is limited to Mac/Windows and you must install those drivers through the installers on FileMaker's website.
 
 ###Turn on xDBC:
-FileMaker Server Admin Console: Click ODBC/JDBC then select Enable ODBC/JDBC
-FileMaker Pro: Choose File menu >Sharing and set ODBC/JDBC Sharing to On
+* FileMaker Server Admin Console: Click ODBC/JDBC then select Enable ODBC/JDBC
+* FileMaker Pro: Choose File menu >Sharing and set ODBC/JDBC Sharing to On
 
 ###Resources:
-[FileMaker 13 ODBC/JDBC guide (pdf)](https://fmhelp.filemaker.com/docs/13/en/fm13_odbc_jdbc_guide.pdf)
-[Configuring ODBC Driver for FileMaker (Mac/Windows) 13](http://help.filemaker.com/app/answers/detail/a_id/13293/~/configuring-odbc-driver-for-filemaker-13)
-[Download xDBC drivers (Labeled "xDBC update for FileMaker Server")](http://www.filemaker.com/support/downloads/)
+* [FileMaker 13 ODBC/JDBC guide (pdf)](https://fmhelp.filemaker.com/docs/13/en/fm13_odbc_jdbc_guide.pdf)
+* [Configuring ODBC Driver for FileMaker (Mac/Windows) 13](http://help.filemaker.com/app/answers/detail/a_id/13293/~/configuring-odbc-driver-for-filemaker-13)
+* [Download xDBC drivers (Labeled "xDBC update for FileMaker Server")](http://www.filemaker.com/support/downloads/)
 
 ###Examples:
 
