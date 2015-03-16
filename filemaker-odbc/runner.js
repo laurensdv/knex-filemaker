@@ -24,7 +24,7 @@ Runner_FILEMAKER_ODBC.prototype._query = Promise.method(function(obj) {
   var sql = obj.sql;
   if (this.isDebugging()) this.debug(obj);
   if (obj.options) sql = _.extend({text: sql}, obj.options);
-  return new Promise(function(resolver, rejecter) {
+  return  new Promise(function(resolver, rejecter) {
     connection.query(SqlString.format(sql, obj.bindings), function(err, response) {
       if (err) return rejecter(err);
       obj.response = response;
@@ -35,16 +35,23 @@ Runner_FILEMAKER_ODBC.prototype._query = Promise.method(function(obj) {
 
 // Ensures the response is returned in the same format as other clients.
 Runner_FILEMAKER_ODBC.prototype.processResponse = function(obj) {
-  var resp = obj.response;
-  if (obj.output) return obj.output.call(this, resp);
+  var resp = obj.response; //resp should be blank for updates/inserts
+
+  if (obj.output) return obj.output.call(this, resp); //does not exist for updates/inserts
   if (obj.method === 'raw') return resp;
   var returning = obj.returning;
-  if (resp.command === 'SELECT') {
+  if (resp.command === 'select') {
     if (obj.method === 'first') return resp.rows[0];
     if (obj.method === 'pluck') return _.pluck(resp.rows, obj.pluck);
     return resp.rows;
+  }else if(obj.method === "insert"){
+
   }
-  if (returning) {
+  console.dir(obj);
+    this.connection.query('select RowID from "AC__Account" where ', function(err, response) {
+      console.dir(response);
+    });
+  if (returning && false) {
     var returns = [];
     for (var i = 0, l = resp.rows.length; i < l; i++) {
       var row = resp.rows[i];
@@ -56,7 +63,7 @@ Runner_FILEMAKER_ODBC.prototype.processResponse = function(obj) {
     }
     return returns;
   }
-  if (resp.command === 'UPDATE' || resp.command === 'DELETE') {
+  if (resp.command === 'update' || resp.command === 'delete') {
     return resp.rowCount;
   }
   return resp;

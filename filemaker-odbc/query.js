@@ -54,13 +54,13 @@ QueryCompiler_FILEMAKER_ODBC.prototype.insert = function() {
     if (_.isString(insertData)) {
       sql += insertData;
     } else  {
-        sql += '(' + this.formatter.columnize(insertData.columns) + ') VALUES (' +
+        sql += ' (' + this.formatter.columnize(insertData.columns) + ') VALUES (' +
           _.map(insertData.values, this.formatter.parameterize, this.formatter).join('), (') + ')';
     }
 
   var returning  = this.single.returning;
   return {
-    sql: sql + returning,
+    sql: sql,
     returning: returning
   };
 };
@@ -72,8 +72,7 @@ QueryCompiler_FILEMAKER_ODBC.prototype.update = function() {
   var returning  = this.single.returning;
   return {
     sql: 'UPDATE ' + this.tableName + ' SET ' + updateData.join(', ') +
-    (wheres ? ' ' + wheres : '') +
-    returning,
+    (wheres ? ' ' + wheres : ''),
     returning: returning
   };
 };
