@@ -4,7 +4,7 @@ module.exports = function(client) {
 
 var _        = require('lodash');
 var inherits = require('inherits');
-var Promise  = require('../node_modules/knex/lib/promise');
+var Promise  = require('bluebird');
 
 var SqlString = require('../node_modules/knex/lib/dialects/mysql/string');
 var Runner = require('../node_modules/knex/lib/runner');

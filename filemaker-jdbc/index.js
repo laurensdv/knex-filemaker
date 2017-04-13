@@ -8,7 +8,7 @@ var _        = require('lodash');
 var inherits = require('inherits');
 
 var Client  = require('../node_modules/knex/lib/client');
-var Promise = require('../node_modules/knex/lib/promise');
+var Promise  = require('bluebird');
 
 var jdbc;
 

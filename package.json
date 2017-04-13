@@ -1,38 +1,32 @@
 {
   "name": "knex-filemaker",
   "version": "0.0.1",
-  "description": "A Knex dialect for connecting to a FileMaker database via JDBC/ODBC",
-  "main": "filemaker.js",
+  "description": "A Knex dialect for connecting to a FileMaker or VDB database via JDBC",
+  "main": "jdbc.js",
   "dependencies": {
-    "knex": "0.7.3",
-    "inherits": "~2.0.1",
-    "lodash": "~2.4.0",
-    "mysql": "*"
-  },
-  "devDependencies": {
-    "jdbc": "0.0.13",
-    "odbc": "*"
+    "bluebird": "*",
+    "knex": "0.12.9",
+    "inherits": "~2.0.3",
+    "lodash": "~3.1.0",
+    "mysql": "2.13.0",
+    "jdbc": "0.5.0",
+    "objectstream": "*"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jeremy-hunter/knex-filemaker.git"
+    "url": "git://github.com/laurensdv/knex-filemaker.git"
   },
   "keywords": [
     "sql",
     "query",
-    "filemaker",
+    "vdb",
     "jdbc",
-    "odbc",
     "knex"
   ],
-  "author": {
-    "name": "Jeremy Hunter",
-    "web": "https://github.com/jeremy-hunter"
-  },
   "files": [
     "README.md",
     "filemaker-jdbc/*",
-    "filemaker-odbc/*",
+    "vdb-jdbc/*",
     "LICENSE"
   ],
   "license": "MIT"
